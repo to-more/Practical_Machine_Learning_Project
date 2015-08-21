@@ -19,8 +19,8 @@ library(rpart)
 library(rpart.plot)
 library(randomForest)
 library(corrplot)
-
-### Data Download
+```
+## Data Download
 ```{r, cache = T}
 trainUrl <-"https://d396qusza40orc.cloudfront.net/predmachlearn/pml-training.csv"
 testUrl <- "https://d396qusza40orc.cloudfront.net/predmachlearn/pml-testing.csv"
