@@ -10,6 +10,7 @@ output:
 
 ## Introduction 
 
+Using devices such as Jawbone Up...
 
 ## Data Load 
 ```{r, cache = T}
