@@ -75,13 +75,17 @@ img {
 <div id="introduction" class="section level2">
 <h2>Introduction</h2>
 </div>
-<div id="correlation-matrix" class="section level1">
-<h1>correlation matrix</h1>
-<p>corrPlot &lt;- cor(trainData[, -length(names(trainData))]) corrplot(corrPlot, method=“color”)</p>
-</div>
-<div id="visualization-tree" class="section level1">
-<h1>visualization tree</h1>
-<p>treeModel &lt;- rpart(classe ~ ., data=trainData, method=“class”) prp(treeModel)</p>
+<div id="data-load" class="section level2">
+<h2>Data Load</h2>
+<pre class="r"><code>library(caret)</code></pre>
+<pre><code>## Loading required package: lattice
+## Loading required package: ggplot2</code></pre>
+<pre class="r"><code>library(rpart)
+library(rpart.plot)
+library(randomForest)</code></pre>
+<pre><code>## randomForest 4.6-10
+## Type rfNews() to see new features/changes/bug fixes.</code></pre>
+<pre class="r"><code>library(corrplot)</code></pre>
 </div>
 
 

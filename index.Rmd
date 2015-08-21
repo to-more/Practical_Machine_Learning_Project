@@ -11,10 +11,10 @@ output:
 ## Introduction 
 
 
-#correlation matrix
-corrPlot <- cor(trainData[, -length(names(trainData))])
-corrplot(corrPlot, method="color") 
-
-# visualization tree 
-treeModel <- rpart(classe ~ ., data=trainData, method="class")
-prp(treeModel)
+## Data Load 
+```{r, cache = T}
+library(caret)
+library(rpart)
+library(rpart.plot)
+library(randomForest)
+library(corrplot)
