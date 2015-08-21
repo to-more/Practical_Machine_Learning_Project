@@ -77,15 +77,26 @@ img {
 </div>
 <div id="data-load" class="section level2">
 <h2>Data Load</h2>
-<pre class="r"><code>library(caret)</code></pre>
-<pre><code>## Loading required package: lattice
-## Loading required package: ggplot2</code></pre>
-<pre class="r"><code>library(rpart)
+<pre class="r"><code>library(caret)
+library(rpart)
 library(rpart.plot)
-library(randomForest)</code></pre>
-<pre><code>## randomForest 4.6-10
-## Type rfNews() to see new features/changes/bug fixes.</code></pre>
-<pre class="r"><code>library(corrplot)</code></pre>
+library(randomForest)
+library(corrplot)
+
+### Data Download</code></pre>
+<pre class="r"><code>trainUrl &lt;-&quot;https://d396qusza40orc.cloudfront.net/predmachlearn/pml-training.csv&quot;
+testUrl &lt;- &quot;https://d396qusza40orc.cloudfront.net/predmachlearn/pml-testing.csv&quot;
+trainFile &lt;- &quot;./data/pml-training.csv&quot;
+testFile  &lt;- &quot;./data/pml-testing.csv&quot;
+if (!file.exists(&quot;./data&quot;)) {
+  dir.create(&quot;./data&quot;)
+}
+if (!file.exists(trainFile)) {
+  download.file(trainUrl, destfile=trainFile, method=&quot;curl&quot;)
+}
+if (!file.exists(testFile)) {
+  download.file(testUrl, destfile=testFile, method=&quot;curl&quot;)
+}</code></pre>
 </div>
 
 
