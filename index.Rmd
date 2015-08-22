@@ -65,8 +65,12 @@ testRaw <- testRaw[, !testRemove]
 testCleaned <- testRaw[, sapply(testRaw, is.numeric)]
 ```
 > After these thwo steps the data goes from:
-> > data set:  observations=19622, variables=160
-> > test data: observations=20, variables=160
+```
+>> data set:  observations=19622, variables=160
+>> test data: observations=20, variables=160
+```
 > to
-> > data set:  observations=19622, variables=53
-> > test data:  observations=20, variables=53
+```
+>> data set:  observations=19622, variables=53
+>> test data:  observations=20, variables=53
+```

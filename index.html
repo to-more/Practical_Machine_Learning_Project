@@ -123,8 +123,15 @@ testRemove &lt;- grepl(&quot;^X|timestamp|window&quot;, names(testRaw))
 testRaw &lt;- testRaw[, !testRemove]
 testCleaned &lt;- testRaw[, sapply(testRaw, is.numeric)]</code></pre>
 <blockquote>
-<p>After these thwo steps the data goes from: &gt; data set: observations=19622, variables=160 &gt; test data: observations=20, variables=160 to &gt; data set: observations=19622, variables=53 &gt; test data: observations=20, variables=53</p>
+<p>After these thwo steps the data goes from:</p>
 </blockquote>
+<pre><code>&gt;&gt; data set:  observations=19622, variables=160
+&gt;&gt; test data: observations=20, variables=160</code></pre>
+<blockquote>
+<p>to</p>
+</blockquote>
+<pre><code>&gt;&gt; data set:  observations=19622, variables=53
+&gt;&gt; test data:  observations=20, variables=53</code></pre>
 </div>
 </div>
 
