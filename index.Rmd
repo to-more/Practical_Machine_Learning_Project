@@ -36,8 +36,8 @@ if (!file.exists(testFile)) {
   download.file(testUrl, destfile=testFile, method="curl")
 }
 ```  
-### Loading Data to DataFrames
-After downloading the data we can load the csv files into data frames.  
+### Loading Data to Data Frames
+load downloaded data in csv files into data frames.  
 ```{r, cache = T}
 trainRaw <- read.csv("./data/pml-training.csv")
 testRaw <- read.csv("./data/pml-testing.csv")
@@ -53,7 +53,7 @@ sum(complete.cases(trainRaw))
 trainRaw <- trainRaw[, colSums(is.na(trainRaw)) == 0] 
 testRaw <- testRaw[, colSums(is.na(testRaw)) == 0] 
 ```  
-2- remove some columns that don't contribute much to the accelerometer measurements.
+2- remove some columns that don't contribute to the accelerometer measurements.
 ```{r, cache = T}
 classe <- trainRaw$classe
 trainRemove <- grepl("^X|timestamp|window", names(trainRaw))
@@ -64,9 +64,9 @@ testRemove <- grepl("^X|timestamp|window", names(testRaw))
 testRaw <- testRaw[, !testRemove]
 testCleaned <- testRaw[, sapply(testRaw, is.numeric)]
 ```
-After these thwo steps the data goes from:
-	data set:  observations=19622, variables=160
-	test data: observations=20, variables=160
-to:
-	data set:  observations=19622, variables=53
-	test data:  observations=20, variables=53
+> After these thwo steps the data goes from:
+> > data set:  observations=19622, variables=160
+> > test data: observations=20, variables=160
+> to
+> > data set:  observations=19622, variables=53
+> > test data:  observations=20, variables=53
