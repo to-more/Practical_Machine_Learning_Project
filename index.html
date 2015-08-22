@@ -99,6 +99,31 @@ if (!file.exists(trainFile)) {
 if (!file.exists(testFile)) {
   download.file(testUrl, destfile=testFile, method=&quot;curl&quot;)
 }</code></pre>
+<div id="loading-data-to-dataframes" class="section level3">
+<h3>Loading Data to DataFrames</h3>
+<p>After downloading the data we can load the csv files into data frames.</p>
+<pre class="r"><code>trainRaw &lt;- read.csv(&quot;./data/pml-training.csv&quot;)
+testRaw &lt;- read.csv(&quot;./data/pml-testing.csv&quot;)</code></pre>
+</div>
+<div id="cleaning-data" class="section level3">
+<h3>Cleaning data</h3>
+<p>clean data and erase of observations with missing values as well as some meaningless variables.</p>
+<pre class="r"><code>sum(complete.cases(trainRaw))</code></pre>
+<pre><code>## [1] 406</code></pre>
+<p>1- remove columns that contain NA missing values.</p>
+<pre class="r"><code>trainRaw &lt;- trainRaw[, colSums(is.na(trainRaw)) == 0] 
+testRaw &lt;- testRaw[, colSums(is.na(testRaw)) == 0] </code></pre>
+<p>2- remove some columns that don’t contribute much to the accelerometer measurements.</p>
+<pre class="r"><code>classe &lt;- trainRaw$classe
+trainRemove &lt;- grepl(&quot;^X|timestamp|window&quot;, names(trainRaw))
+trainRaw &lt;- trainRaw[, !trainRemove]
+trainCleaned &lt;- trainRaw[, sapply(trainRaw, is.numeric)]
+trainCleaned$classe &lt;- classe
+testRemove &lt;- grepl(&quot;^X|timestamp|window&quot;, names(testRaw))
+testRaw &lt;- testRaw[, !testRemove]
+testCleaned &lt;- testRaw[, sapply(testRaw, is.numeric)]</code></pre>
+<p>After these thwo steps the data goes from: data set: observations=19622, variables=160 test data: observations=20, variables=160 to: data set: observations=19622, variables=53 test data: observations=20, variables=53</p>
+</div>
 </div>
 
 
