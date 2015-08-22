@@ -74,3 +74,55 @@ testCleaned <- testRaw[, sapply(testRaw, is.numeric)]
 >> data set:  observations=19622, variables=53
 >> test data:  observations=20, variables=53
 ```
+
+### Slice the data
+Split cleaned training set into a pure training data set and a validation data set. We'll use validation data set to conduct cross validation. 
+```{r, cache = T}
+set.seed(22519)
+inTrain <- createDataPartition(trainCleaned$classe, p=0.70, list=F)
+trainData <- trainCleaned[inTrain, ]
+testData <- trainCleaned[-inTrain, ]
+```
+
+## Modeling
+We build a predictive model using **Random Forest** algorithm because it selects important variables and is robust to correlated covariates & outliers in general. We'll use **5-fold cross validation** .  
+```{r, cache = T}
+controlRf <- trainControl(method="cv", 5)
+modelRf <- train(classe ~ ., data=trainData, method="rf", trControl=controlRf, ntree=250)
+modelRf
+```
+Performance estimatimation of the model on the validation data set.  
+```{r, cache = T}
+predictRf <- predict(modelRf, testData)
+confusionMatrix(testData$classe, predictRf)
+```
+```{r, cache = T}
+accuracy <- postResample(predictRf, testData$classe)
+accuracy
+oose <- 1 - as.numeric(confusionMatrix(testData$classe, predictRf)$overall[1])
+oose
+```
+Estimated accuracy of the model: 99.42% 
+```
+Estimated out-of-sample error: 0.58%.
+
+
+## Prediction for Test Data
+Apply the model to the original testing data downloaded from the source.
+```{r, cache = T}
+result <- predict(modelRf, testCleaned[, -length(names(testCleaned))])
+result
+```  
+
+
+## Appendix: Figures
+1. Correlation Matrix  
+```{r, cache = T}
+corrPlot <- cor(trainData[, -length(names(trainData))])
+corrplot(corrPlot, method="color")
+```
+2. Decision Tree 
+```{r, cache = T}
+treeModel <- rpart(classe ~ ., data=trainData, method="class")
+prp(treeModel) # fast plot
+```
